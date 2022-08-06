@@ -18,10 +18,8 @@ if (isset($_GET["sub"])) {
 ?>
 
 <div class="name"> <?= $user["name"] . " " . $user["family"] ?></div>
-
-
+ <did> کد ملی <?= $user["code"] ?></did>
 <form action="" method="get">
-    <input type="number" name="code" value="<?= $user["code"] ?>"> <br><br>
     <input type="date" name="date"> <br><br>
     ساعت ورود
     <select name="enter_h">
@@ -49,6 +47,6 @@ if (isset($_GET["sub"])) {
             <?php }else{ ?><option value="<?=$i?>" ><?=$i?></option>
             <?php }}?>
     </select> <br>
-    <textarea name="report" cols="30" rows="10" placeholder="متن گزارش"></textarea> <br>
+    <textarea name="report" cols="30" rows="10" placeholder="متن گزارش" ></textarea> <br>
     <input type="submit" value="send" name="sub">
 </form>

@@ -29,8 +29,13 @@ if (isset($_POST["name"], $_POST["family"], $_POST["password"], $_POST["send"], 
         <input type="text" name="codemeli" placeholder="codemeli">
         <input type="text" name="password" placeholder="password">
         <input type="submit" name="send">
-
     </form>
+    <div>
+        اگر قبلا ثبت نام کرده اید برای ورود
+        <a href="singin.php"> اینجا </a>
+        را کلیک کنید.
+    </div>
+
 <?php if ($flag == true) { ?>
     <div>
          قبلا ثبت نام کرده اید برای ورود
