@@ -4,8 +4,18 @@ session_start();
 
 try {
     $conn = new PDO("mysql:host=localhost;dbname=record_work_report", "root", "");
+    $conn->exec("SET NAMES utf8");
 } catch (PDOException $e) {
     echo "error" . $e->getMessage();
+}
+function is_sing_up()
+{
+    global $conn;
+    $sql = "SELECT `code` FROM `user`";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $user_singup = $stmt->fetchAll();
+    return $user_singup;
 }
 
 function user($code)
@@ -46,6 +56,28 @@ VALUES (:date, :enter_h, :enter_m, :out_h, :out_m, :report,:user_code)";
     $stmt->bindParam("report", $report);
     $stmt->bindParam("user_code", $user_code);
     $stmt->execute();
+}
+
+function get_report_date($code)
+{
+    global $conn;
+    $sql = "SELECT `date` FROM `report` WHERE `user_code`=:code";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam("code", $code);
+    $stmt->execute();
+    $date = $stmt->fetchAll();
+    return $date;
+}
 
 
+function chek_singin($code, $pass)
+{
+    global $conn;
+    $sql = "SELECT * FROM `user` WHERE `code`=:code  AND `password`=:pass";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam("code",$code);
+    $stmt->bindParam("pass",$pass);
+    $stmt->execute();
+    $chek_user=$stmt->fetch(PDO::FETCH_ASSOC);
+    return $chek_user;
 }

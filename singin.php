@@ -1,11 +1,18 @@
 <?php
-session_start();
-
+/*session_start();*/
+require "_load.php";
 if (isset($_POST["codemeli"], $_POST["password"], $_POST["sub"])) {
     $codemeli = $_POST["codemeli"];
     $password = $_POST["password"];
-    $_SESSION["codemeli"] = $codemeli;
-    header("Location:report.php");
+    $check_user=chek_singin($codemeli,$password);
+   if($check_user===false){
+       echo "کد ملی یا رمز عبور اشتباه است!!";
+   }else{
+       $_SESSION["codemeli"] = $codemeli;
+       header("Location:report.php");
+       exit();
+   }
+
 }
 ?>
 

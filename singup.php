@@ -6,8 +6,19 @@ if (isset($_POST["name"], $_POST["family"], $_POST["password"], $_POST["send"], 
     $family = $_POST["family"];
     $codemeli = $_POST["codemeli"];
     $password = $_POST["password"];
-    sing_up("$name", "$family", "$password", "$codemeli");
-    header("Location:singin.php");
+    $item = is_sing_up();
+    $code = [];
+    foreach ($item as $i) {
+        $code[] = $i["code"];
+    }
+    $exist_code=in_array($codemeli, $code);
+    if(!$exist_code){
+        sing_up("$name", "$family", "$password", "$codemeli");
+        header("Location:singin.php");
+
+    }else{
+        $flag=true;
+    }
 }
 
 ?>
@@ -22,7 +33,7 @@ if (isset($_POST["name"], $_POST["family"], $_POST["password"], $_POST["send"], 
     </form>
 <?php if ($flag == true) { ?>
     <div>
-        اگر قبلا ثبت نام کرده اید برای ورود
+         قبلا ثبت نام کرده اید برای ورود
         <a href="singin.php"> اینجا </a>
         را کلیک کنید.
     </div>

@@ -4,9 +4,16 @@ if (isset($_SESSION["codemeli"])) {
     $user = user($_SESSION["codemeli"]);
 }
 if (isset($_GET["sub"])) {
-    save_report($_GET["date"], $_GET["enter_h"], $_GET["enter_m"], $_GET["out_h"], $_GET["out_m"], $_GET["report"], $user["code"]);
-
-
+    $date=get_report_date($user["code"]);
+    $date_exist=[];
+    foreach ($date as $item){
+        $date_exist[]=$item["date"];
+    }
+    if(in_array($_GET["date"],$date_exist)===true){
+       echo "شما برای این تاریخ گزارش ثبت کرده اید!!";
+    }else{
+        save_report($_GET["date"], $_GET["enter_h"], $_GET["enter_m"], $_GET["out_h"], $_GET["out_m"], $_GET["report"], $user["code"]);
+    }
 }
 ?>
 
